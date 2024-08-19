@@ -1,1 +1,63 @@
-<p>consulta-libros works!</p>
+<div class="container">
+    <form class="content">
+        <div class="submit-form">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Consulta de docente</h6>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <label for="titulo" class="col-lg-1">Titulo</label>
+                <div class="col-lg-2">
+                    <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="titulo">
+                </div>
+                <label for="anio" class="col-lg-1">Año</label>
+                <div class="col-lg-2">
+                    <input type="number" name="anio" id="anio" class="form-control" [(ngModel)]="anio">
+                </div>
+                <div class="col-lg-2 mt-2">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" class="form-check-input" role="switch" id="estado" [(ngModel)]="estado" checked name="estado"/>
+                        <label class="form-check-label" for="estado">Estado</label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" (click)="consultarLibro()">Filtrar</button>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-lg-4">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" class="form-select" [(ngModel)]="idcategoria">
+                        <option value="0">Seleccione</option>
+                        @for (c of categoria; track $index) {
+                            <option value="{{c.idcategoria}}">{{c.descripcion}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td>Titulo</td>
+                        <td>Año</td>
+                        <td>Estado</td>
+                        <td>Categoria</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (l of libros; track $index) {
+                        <tr>
+                            <td>{{l.titulo}}</td>
+                            <td>{{l.anio}}</td>
+                            <td>{{l.estado == 1 ? "Activo" : "Inactivo"}}</td>
+                            <td>{{l.categoriaLibro?.descripcion}}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
